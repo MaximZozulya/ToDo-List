@@ -1,6 +1,11 @@
 'use strict';
 
-const todoList = [];
+const todoList = [{
+  name:'Приготовить ужин',
+  newDate: '2024-11-07'
+}, { name:'Помыть посуду',
+     newDate: '2024-11-07'
+}];
 
 // функция вывода значения 
 renderTodoList();
@@ -9,11 +14,15 @@ function renderTodoList() {
   let todoListHTML = '';
 
   for (let i = 0; i < todoList.length; i++ ) {
-    const todo = todoList[i];
-    const html = `<p>${todo}<button onclick="todoList.splice(${i},1);renderTodoList();">Удалить</button></p>`;
+    const todoObject = todoList[i];
+    const {name, newDate} = todoObject;
+    const html = `<p>${name} ${newDate}
+                  <button onclick="
+                  todoList.splice(${i},1);
+                  renderTodoList();
+                  ">Удалить</button></p>`;
     todoListHTML += html;
   }
-  console.log(todoListHTML);
   document.querySelector('.js-todo-list').innerHTML = todoListHTML;
 }
 
@@ -21,8 +30,12 @@ function renderTodoList() {
 function addTodo() {
   const inputElement = document.querySelector('.js-name-input');
   const name = inputElement.value;
-  todoList.push(name);
-  console.log(todoList);
+  const dateInputElement = document.querySelector('.js-newDate-input');
+  const newDate = dateInputElement.value;
+  todoList.push({
+    name,
+    newDate
+  });
   inputElement.value = '';
   renderTodoList();
 }
