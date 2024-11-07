@@ -7,13 +7,15 @@
     <title>ToDo List</title>
   </head>
   <body>
-    <p>Список задач</p>
-    <input class="js-name-input" placeholder="Название задачи...">
-    <input class="js-newDate-input" type="date">
-    <button onclick="addTodo()">Добавить</button>
-    <div class="js-todo-list"></div>
-
-
+    <fieldset>
+      <legend class="title">Список задач</legend>
+      <div class="todo-input-grid">
+        <input class="js-name-input name-input" placeholder="Название задачи...">
+        <input class="js-newDate-input new-date-input" type="date">
+        <button class="add-button" onclick="addTodo()">Добавить</button>
+      </div>
+      <div class="js-todo-list todo-grid"></div>
+    </fieldset>
     
     <script src="js/main.js"></script>
   </body>
