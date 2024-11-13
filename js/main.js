@@ -11,22 +11,31 @@ function renderTodoList() {
     const { name, newDate } = todoObject;
     const html = `<div>${name}</div> 
                   <div>${newDate}</div>
-                  <button class="delete-button" onclick="
-                    todoList.splice(${index}, 1);
-                    saveToLocalStorage();
-                    renderTodoList();
-                  ">Удалить</button>`;
+                  <button class="delete-button js-delete-button">Удалить</button>`;
     todoListHTML += html;
   });
  
   // Обновление списка задач на странице
   document.querySelector('.js-todo-list').innerHTML = todoListHTML; 
+  document.querySelectorAll('.js-delete-button')
+    .forEach((deleteButton, index) => {
+      deleteButton.addEventListener('click', () => {
+        todoList.splice(index, 1);
+        saveToLocalStorage();
+        renderTodoList();
+      });
+    });
 }
 
 // Функция для сохранения в localStorage
 function saveToLocalStorage() {
   localStorage.setItem('todoList', JSON.stringify(todoList)); // Сохраняем список задач в localStorage
 }
+
+document.querySelector('.js-add-button')
+  .addEventListener('click', () => {
+    addTodo();
+  });
 
 // Функция добавления задачи
 function addTodo() {
